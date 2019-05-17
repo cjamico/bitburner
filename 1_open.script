@@ -1,0 +1,35 @@
+var target = args[0];
+var home = 'home';
+var ports = 0;
+
+// open them ports if you got em
+if (fileExists("BruteSSH.exe", home)) {
+    brutessh(target);
+    ports++;
+}
+if (fileExists("FTPCrack.exe", home)) {
+    ftpcrack(target);
+    ports++;
+}
+if (fileExists("relaySMTP.exe", home)) {
+    relaysmtp(target);
+    ports++;
+}
+if (fileExists("HTTPWorm.exe", home)) {
+    httpworm(target);
+    ports++;
+}
+if (fileExists("SQLInject.exe", home)) {
+    sqlinject(target);
+    ports++;
+}
+
+if (getServerNumPortsRequired(target) < ports) {
+    nuke(target);
+}
+
+if (hasRootAccess(target)) {
+    tprint("success: root access");
+} else {
+    tprint("fail: access denied");
+}

@@ -1,0 +1,23 @@
+var target = args[0];
+var home = args[1] ? args[1] : 'home';
+var script = 'innocuous.script';
+
+// are you good enough?
+if (getHackingLevel() > getServerRequiredHackingLevel(target)) {
+
+    // thread count
+    var needed = getScriptRam(script);
+    var res = getServerRam(target);
+    var totalRam = res[0];
+    var ramUsed = res[1];
+    var threads = Math.floor((totalRam - ramUsed) / needed);
+
+    // copy the file
+    scp(script, home, target);
+
+    // run that shit
+    exec(script, target, threads);
+
+} else {
+    tprint("nice try bitch... get good");
+}
