@@ -1,35 +1,46 @@
+tprint('___Root access script___');
+
 var target = args[0];
 var home = 'home';
 var ports = 0;
 
 // open them ports if you got em
+tprint('...opening ports: ');
+
 if (fileExists("BruteSSH.exe", home)) {
+    tprint('   -ssh');
     brutessh(target);
     ports++;
 }
 if (fileExists("FTPCrack.exe", home)) {
+    tprint('   -ftp');
     ftpcrack(target);
     ports++;
 }
 if (fileExists("relaySMTP.exe", home)) {
+    tprint('   -smtp');
     relaysmtp(target);
     ports++;
 }
 if (fileExists("HTTPWorm.exe", home)) {
+    tprint('   -http');
     httpworm(target);
     ports++;
 }
 if (fileExists("SQLInject.exe", home)) {
+    tprint('   -sql');
     sqlinject(target);
     ports++;
 }
 
+tprint('... ' + ports + ' open.');
 if (getServerNumPortsRequired(target) < ports) {
+    tprint('...attempting root access:');
     nuke(target);
 }
 
 if (hasRootAccess(target)) {
-    tprint("success: root access");
+    tprint("SUCCESS: root access");
 } else {
-    tprint("fail: access denied");
+    tprint("FAIL: access denied");
 }

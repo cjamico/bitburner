@@ -1,9 +1,11 @@
+tprint('___Run script___');
+
 var target = args[0];
-var home = args[1] ? args[1] : 'home';
-var script = 'innocuous.script';
+var script = args[2] ? args[2] : 'innocuous.script';
 
 // are you good enough?
 if (getHackingLevel() > getServerRequiredHackingLevel(target)) {
+    tprint('...hacking skills okay');
 
     // thread count
     var needed = getScriptRam(script);
@@ -13,11 +15,12 @@ if (getHackingLevel() > getServerRequiredHackingLevel(target)) {
     var threads = Math.floor((totalRam - ramUsed) / needed);
 
     // copy the file
-    scp(script, home, target);
+    scp(script, target);
 
     // run that shit
     exec(script, target, threads);
 
 } else {
-    tprint("nice try bitch... get good");
+    var needed = getServerRequiredHackingLevel(target) - getHackingLevel();
+    tprint("Nope: hacking level is too low. Need " + needed + " more pts.");
 }
