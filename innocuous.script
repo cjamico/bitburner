@@ -1,1 +1,13 @@
-while (true) { hack(getHostname()); }
+target = getHostname();
+moneyThresh = args[0] ? args[0] : (getServerMaxMoney(target) * 0.9);
+securityThresh = args[1] ? args[1] : (Math.round(getServerBaseSecurityLevel(target) / 3) + 2);
+
+while (true) {
+    if (getServerSecurityLevel(target) > securityThresh) {
+        weaken(target);
+    } else if (getServerMoneyAvailable(target) < moneyThresh) {
+        grow(target);
+    } else {
+        hack(target);
+    }
+}

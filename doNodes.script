@@ -1,0 +1,95 @@
+function myMoney() {
+    return getServerMoneyAvailable("home");
+}
+
+function brokenCost(cost) {
+    if (cost > 500000000) {
+        return false;
+    }
+    return true;
+}
+
+function upgrdLvl(cap, rate) {
+    var cnt = hacknet.numNodes();
+    for (var i = 0; i < cnt; i++) {
+        while (hacknet.getNodeStats(i).level < cap) {
+            var cost = hacknet.getLevelUpgradeCost(i, rate);
+            while (myMoney() < cost) {
+                print("Need $" + cost + " . Have $" + myMoney());
+                sleep(3000);
+            }
+            res = hacknet.upgradeLevel(i, rate);
+        }
+    }
+}
+
+function upgrdRam(cap, rate) {
+    var cnt = hacknet.numNodes();
+    for (var i = 0; i < cnt; i++) {
+        while (hacknet.getNodeStats(i).ram < cap) {
+            var cost = hacknet.getRamUpgradeCost(i, rate);
+            while (myMoney() < cost) {
+                print("Need $" + cost + " . Have $" + myMoney());
+                sleep(3000);
+            }
+            res = hacknet.upgradeRam(i, rate);
+        }
+    }
+}
+
+function upgrdCor(cap, rate) {
+    var cnt = hacknet.numNodes();
+    for (var i = 0; i < cnt; i++) {
+        while (hacknet.getNodeStats(i).cores < cap) {
+            var cost = hacknet.getCoreUpgradeCost(i, rate);
+            while (myMoney() < cost) {
+                print("Need $" + cost + " . Have $" + myMoney());
+                sleep(3000);
+            }
+            res = hacknet.upgradeCore(i, rate);
+        }
+    }
+
+}
+
+function buyHN(amt) {
+    while (hacknet.numNodes() < amt) {
+        res = hacknet.purchaseNode();
+        print("Purchased hacknet Node with index " + res);
+    }
+}
+
+disableLog("getServerMoneyAvailable");
+disableLog("sleep");
+
+buyHN(10);
+tprint("Pass1: 10 nodes purchased.")
+
+upgrdLvl(50, 2);
+tprint("Pass1: All nodes upgraded to level 50");
+
+//upgrdRam(4, 1);
+tprint("Pass1: All nodes upgraded to 4GB RAM");
+
+// second pass to max nodes
+upgrdLvl(200, 50);
+tprint("Pass2: All nodes upgraded to max level 200");
+
+//upgrdRam(64, 2);
+tprint("Pass2: All nodes upgraded to max 64GB RAM");
+
+upgrdCor(16, 4);
+tprint("Pass2: All nodes upgraded to max 16 cores");
+
+// final pass
+buyHN(30);
+tprint("Final: 30 nodes purchased.")
+
+upgrdLvl(200, 199);
+tprint("Final: All Levels maxed.");
+
+upgrdRam(64, 6);
+tprint("Final: All RAM maxed.");
+
+upgrdCor(16, 15);
+tprint("Final: All Cores maxed.");

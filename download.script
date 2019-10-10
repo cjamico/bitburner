@@ -1,3 +1,3 @@
-wget('https://raw.githubusercontent.com/cjamico/bitburner/master/1_open.script', '1_open.script');
+wget('https://raw.githubusercontent.com/cjamico/bitburner/master/hackThePlanet.script', 'hackThePlanet.script');
 wget('https://raw.githubusercontent.com/cjamico/bitburner/master/innocuous.script', 'innocuous.script');
-wget('https://raw.githubusercontent.com/cjamico/bitburner/master/2_go.script', '2_go.script');
+wget('https://raw.githubusercontent.com/cjamico/bitburner/master/doNodes.script', 'doNodes.script');

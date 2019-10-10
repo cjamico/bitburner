@@ -1,0 +1,120 @@
+// Set these variables
+var doKillAll = true;
+var script = 'innocuous.script';
+var home = 'home';
+
+var hosts = ['foodnstuff',
+    'sigma-cosmetics',
+    'joesguns',
+    'hong-fang-tea',
+    'harakiri-sushi',
+    'iron-gym',
+    'CSEC',
+    'max-hardware',
+    'nectar-net',
+    'zer0',
+    'neo-net',
+    'phantasy',
+    'omega-net',
+    'silver-helix',
+    'comptek',
+    //'johnson-ortho',
+    'avmnite-02h',
+    'the-hub',
+    'crush-fitness',
+    'netlink',
+    'zb-institute',
+    'syscore',
+    'summit-uni',
+    'catalyst',
+    'I.I.I.I',
+    'rothman-uni',
+    'lexo-corp',
+    'millenium-fitness',
+    'rho-construction',
+    'alpha-ent',
+    'aevum-police',
+    'snap-fitness',
+    'galactic-cyber',
+    'aerocorp',
+    'global-pharm',
+    'deltaone',
+    'unitalife',
+    'omnia',
+    'defcomm',
+    'solaris',
+    'icarus',
+    'univ-energy',
+    'zeus-med',
+    'infocomm',
+    'nova-med',
+    'taiyang-digital',
+    'zb-def'
+];
+
+for (i = 0; i < hosts.length; i++) {
+    var target = hosts[i];
+    var ports = 0;
+    
+    if(doKillAll){
+        killall(target);
+    }
+
+    // open them ports if you got em
+    if (fileExists("BruteSSH.exe", home)) {
+        brutessh(target);
+        ports++;
+    }
+    if (fileExists("FTPCrack.exe", home)) {
+        ftpcrack(target);
+        ports++;
+    }
+    if (fileExists("relaySMTP.exe", home)) {
+        relaysmtp(target);
+        ports++;
+    }
+    if (fileExists("HTTPWorm.exe", home)) {
+        httpworm(target);
+        ports++;
+    }
+    if (fileExists("SQLInject.exe", home)) {
+        sqlinject(target);
+        ports++;
+    }
+
+    if (getServerNumPortsRequired(target) < ports) {
+        nuke(target);
+    }
+
+    if (hasRootAccess(target)) {
+        tprint("Success! Root Access for " + target);
+
+        // are you good enough?
+        if (getHackingLevel() > getServerRequiredHackingLevel(target)) {
+
+            // thread count
+            var needed = getScriptRam(script);
+            var res = getServerRam(target);
+            var totalRam = res[0];
+            var ramUsed = res[1];
+            var threads = Math.floor((totalRam - ramUsed) / needed);
+            
+            if(threads > 0) {
+                // copy the file
+                scp(script, home, target);
+    
+                // run that shit
+                exec(script, target, threads);
+                tprint("Running script on " + target);
+            } else {
+                tprint("Insufficient RAM on " + target);
+            }
+
+        } else {
+            tprint("Nice try bitch... get good");
+        }
+
+    } else {
+        tprint("Fail! Access Denied for " + target);
+    }
+}
