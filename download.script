@@ -1,3 +1,4 @@
 wget('https://raw.githubusercontent.com/cjamico/bitburner/master/hackThePlanet.script', 'hackThePlanet.script');
 wget('https://raw.githubusercontent.com/cjamico/bitburner/master/innocuous.script', 'innocuous.script');
 wget('https://raw.githubusercontent.com/cjamico/bitburner/master/doNodes.script', 'doNodes.script');
+wget('https://raw.githubusercontent.com/cjamico/bitburner/master/start.ns', 'start.ns');
