@@ -1,0 +1,18 @@
+ ___________________________________________________
+| CMD   |   What it does                            |
+|---------------------------------------------------|
+| 0     |   Singularity Configuration settings      |
+|       |                                           |
+| 1     |   Early game startup                      |
+| 2     |   Hack The Planet [RestartScripts=false]  |
+| 3     |   Node buyer                              |
+| 4     |   Solves available contracts              |
+| 5     |   Run Singularity Functions               |
+| 6     |   Join and Earn Faction Rep               |
+| 7     |   Augmentation Purchase Wizard            |
+|       |                                           |
+| 411   |   ??? You got here so...                  |
+|       |                                           |
+| scan  |   Fancy-ass Scan and Analyze              |
+| k     |   Kill All active scripts                 |
+|___________________________________________________|

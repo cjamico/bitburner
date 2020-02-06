@@ -1,0 +1,8 @@
+"Baseball Bat",
+"Katana",
+"Glock 18C",
+"P90C",
+"Steyr AUG",
+"AK-47",
+"M15A10 Assault Rifle",
+"AWM Sniper Rifle"

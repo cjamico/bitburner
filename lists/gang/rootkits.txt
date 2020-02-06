@@ -1,0 +1,5 @@
+"NUKE Rootkit",
+"Soulstealer Rootkit",
+"Demon Rootkit",
+"Hmap Node",
+"Jack the Ripper"

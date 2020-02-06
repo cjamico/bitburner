@@ -1,0 +1,4 @@
+"shoplift"
+"mug"
+"deal drugs"
+"homicide"

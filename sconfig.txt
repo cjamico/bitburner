@@ -1,0 +1,42 @@
+{
+    "hacking_training": {
+        "use_free_course": false,
+        "university_name": "ZB Institute of Technology",
+        "hack_limit": 150
+    },
+    "charisma_training": {
+        "charisma_limit": 100
+    },
+    "combat_training": {
+        "gym_name": "Millenium Fitness Gym",
+        "workout_limits": {
+            "strength": 100,
+            "defense": 100,
+            "dexterity": 100,
+            "agility": 100
+        }
+    },
+    "crime": {
+        "attempts": 30000
+    },
+
+    "user_prompts": {
+        "yes_to_all": false,
+        "fine_tuning": {
+            "do_program_buying": false,
+            "do_study_hacking": false,
+            "do_charisma_training": false,
+            "do_combat_stat_building": false,
+            "do_crime": false
+        },
+        "disable_all": false
+    },
+
+    "input_file_locations": {
+        "crimes": "/lists/fast-crimes.txt",
+        "programs": "/lists/programs.txt"
+    },
+
+    "idle_timeout_minutes": 5,
+    "idle_can_travel": true
+}

@@ -1,104 +1,38 @@
+/* Customizable variables for basic needs scripting */
+const freeCourse = false; // Study using free course (or Algorithms)
+const universityName = "Rothman University"; // Where to study; needs to be in current city
+let limit = 10; // Level to reach before completion
+const gymName = "Iron Gym"; // Where to workout; needs to be in current city
+
 export async function main(ns) {
-    var places = scanMore("", "home", ns);
-    //pprint(places, ns);
-    hackItAll(places, ns);
-}
+    limit = ns.args[0] ? ns.args[0] : limit;
+    // STUDY
+    ns.tprint("Studying hacking...");
+    let courseName = freeCourse ? "Study Computer Science" : "Algorithms";
+    while (ns.getStats().hacking < limit) {
+        ns.universityCourse(universityName, courseName);
+        await ns.sleep(5000);
+    }
+    ns.tprint(" Hacking level " + limit + " reached.");
 
-function scanMore(prev, current, ns) {
-    var all = [];
-    all.push(current);
-    let list = ns.scan(current);
-    for (var i in list) {
-        var next = list[i];
-        if (next != prev) {
-            var sarr = scanMore(current, next, ns).toString();
-            var narr = sarr.split(',');
-            all = all.concat(narr);
+    // CHARISMA
+    ns.tprint("Gaining charisma...");
+    while (ns.getStats().charisma < limit) {
+        ns.universityCourse(universityName, "Leadership");
+        await ns.sleep(5000);
+    }
+    ns.tprint(" Charisma level " + limit + " reached.");
+
+    // WORKOUT
+    ns.tprint("Working out that bod...");
+    let stats = ["strength", "defense", "dexterity", "agility"];
+    for (let stat of stats) {
+        while (ns.getStats()[stat] < limit) {
+            ns.gymWorkout(gymName, stat);
+            await ns.sleep(5000);
         }
     }
-    return all;
-}
+    ns.tprint(" Combat stats all reached level " + limit + ".");
 
-function pprint(arr, ns) {
-    for (var h = 0; h < arr.length; h++) {
-        ns.tprint(arr[h]);
-    }
-}
-
-function hackItAll(hosts, ns) {
-    // Set these variables
-    var doKillAll = true;
-    var script = 'innocuous.script';
-    var home = 'home';
-
-    for (var j = 0; j < hosts.length; j++) {
-        var target = hosts[j];
-        var ports = 0;
-
-        if (target === 'home') {
-            continue;
-        }
-
-        if (doKillAll) {
-            ns.killall(target);
-        }
-
-        // open them ports if you got em
-        if (ns.fileExists("BruteSSH.exe", home)) {
-            ns.brutessh(target);
-            ports++;
-        }
-        if (ns.fileExists("FTPCrack.exe", home)) {
-            ns.ftpcrack(target);
-            ports++;
-        }
-        if (ns.fileExists("relaySMTP.exe", home)) {
-            ns.relaysmtp(target);
-            ports++;
-        }
-        if (ns.fileExists("HTTPWorm.exe", home)) {
-            ns.httpworm(target);
-            ports++;
-        }
-        if (ns.fileExists("SQLInject.exe", home)) {
-            ns.sqlinject(target);
-            ports++;
-        }
-
-        if (ns.getServerNumPortsRequired(target) < ports) {
-            ns.nuke(target);
-        }
-
-        if (ns.hasRootAccess(target)) {
-            ns.tprint("Success! Root Access for " + target);
-
-            // are you good enough?
-            if (ns.getHackingLevel() > ns.getServerRequiredHackingLevel(target)) {
-
-                // thread count
-                var needed = ns.getScriptRam(script);
-                var res = ns.getServerRam(target);
-                var totalRam = res[0];
-                var ramUsed = res[1];
-                var threads = Math.floor((totalRam - ramUsed) / needed);
-
-                if (threads > 0) {
-                    // copy the file
-                    ns.scp(script, home, target);
-
-                    // run that shit
-                    ns.exec(script, target, threads);
-                    ns.tprint("Running script on " + target);
-                } else {
-                    ns.tprint("Insufficient RAM on " + target);
-                }
-
-            } else {
-                ns.tprint("Nice try bitch... get good");
-            }
-
-        } else {
-            ns.tprint("Fail! Access Denied for " + target);
-        }
-    }
+    ns.universityCourse(universityName, "Study Computer Science");
 }
