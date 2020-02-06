@@ -1,20 +1,22 @@
 const files = [
-    {"name": "sconfig.txt", "location":""},
-    {"name": "start.ns", "location":""},
-    {"name": "hackThePlanet.ns", "location":""},
-    {"name": "nodes.ns", "location":""},
-    {"name": "contractor.ns", "location":""},
-    {"name": "singularityfunctions.ns", "location":""},
-    {"name": "faction.ns", "location":""},
-    {"name": "augments.ns", "location":""},
-    {"name": "scan.ns", "location":""},
-    {"name": "printfile.ns", "location":""},
-    {"name": "Shortcut_Help.txt", "location":"/info/"},
-    {"name": "", "location":""},
+    "sconfig.txt",
+    "start.ns",
+    "hackThePlanet.ns",
+    "nodes.ns",
+    "contractor.ns",
+    "singularityfunctions.ns",
+    "faction.ns",
+    "augments.ns",
+    "scan.ns",
+    "/helpers/helper.ns",
+    "printfile.ns",
+    "/info/Shortcut_Help.txt",
+    "/lists/gang/allBasicEquipment.txt",
+    "/lists/gang/tasks.txt",
 ];
 
 export async function main(ns) {
     for (let file of files) {
-        await ns.wget('https://raw.githubusercontent.com/cjamico/bitburner/master/' + file.name, file.location + file.name);
+        await ns.wget('https://raw.githubusercontent.com/cjamico/bitburner/master/' + file, file);
     }
 }
